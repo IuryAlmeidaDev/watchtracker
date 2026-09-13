@@ -1,25 +1,25 @@
 ﻿---
 name: WatchTracker
-description: A restrained dark watch ranking with sage accents.
+description: Warm beige and walnut watch ranking with light and dark modes.
 colors:
-  accent: "#c2ceab"
-  background: "#131614"
-  surface: "#1b201c"
-  surface-priority: "#232a22"
-  text: "#f0f0e9"
-  muted: "#a6aea6"
-  line: "#313731"
-  card-border: "#30382f"
-  priority-border: "#59654e"
-  photo-background: "#141915"
-  photo-label: "#9da799"
-  count-background: "#2a3228"
-  priority-background: "#36422e"
-  priority-text: "#d5e3c4"
-  tag-text: "#c3cbc1"
-  tag-border: "#424b40"
-  control-hover: "#364032"
-  control-hover-text: "#eff2e7"
+  accent: "#795638"
+  background: "#f4efe7"
+  surface: "#fffaf3"
+  surface-priority: "#e8dccb"
+  text: "#392d25"
+  muted: "#72604f"
+  line: "#d5c5b3"
+  card-border: "#d5c5b3"
+  priority-border: "#795638"
+  photo-background: "#eee5d8"
+  photo-label: "#72604f"
+  count-background: "#e8dccb"
+  priority-background: "#e8dccb"
+  priority-text: "#523923"
+  tag-text: "#392d25"
+  tag-border: "#d5c5b3"
+  control-hover: "#e8dccb"
+  control-hover-text: "#392d25"
 typography:
   display:
     fontFamily: "Manrope, sans-serif"
@@ -167,3 +167,7 @@ Style tags are outlined metadata; the next-purchase badge is filled. The photo p
 
 Review evidence: .impeccable/review/desktop.png and .impeccable/review/mobile.png. Recorded review disposition: ship; no findings. Production build and interaction checks passed, including keyboard and pointer reordering with persistence.
 
+
+## Theme and expansion update
+
+Light mode is the default: warm paper, beige surfaces, walnut actions. Dark mode uses brown surfaces and warm cream text; the header toggle persists locally. Only one watch expands at a time. Expanded covers are hidden, with a single gallery above the specifications. Gallery stage: 480px desktop and 320px mobile, maximum width 640px. Panel opening uses 420ms and closing 300ms, respecting reduced motion.

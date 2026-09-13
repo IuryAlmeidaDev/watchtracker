@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
+import { useWatchExpansion } from '../store/appearanceStore';
 import { ChevronDown } from 'lucide-react';
 import type { WatchItem } from '../store/catalogStore';
 import { getWatchDetails } from '../lib/watch-details';
@@ -7,7 +8,7 @@ import { WatchPhoto } from './WatchPhoto';
 import { WatchDetails } from './WatchDetails';
 
 export function WatchExpandablePhoto({ watch }: { watch: WatchItem }) {
-  const [open, setOpen] = useState(false);
+  const { open, setOpen } = useWatchExpansion(watch.id);
   const trigger = useRef<HTMLButtonElement>(null);
   const close = () => { setOpen(false); trigger.current?.focus({ preventScroll: true }); };
   return <Collapsible open={open} onOpenChange={setOpen} onKeyDown={(event) => {

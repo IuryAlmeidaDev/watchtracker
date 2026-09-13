@@ -38,6 +38,8 @@ import { CollectionView } from './components/CollectionView';
 import { WatchEmptyState } from './components/WatchEmptyState';
 import { Alert, AlertDescription } from './components/ui/alert';
 import { Button } from './components/ui/button';
+import { ThemeToggle } from './components/ThemeToggle';
+import { useWatchExpansion } from './store/appearanceStore';
 import { WatchPhoto } from './components/WatchPhoto';
 import { WatchDetails } from './components/WatchDetails';
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from './components/ui/collapsible';
@@ -63,7 +65,7 @@ function WatchRankingCard({
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: watch.id,
   });
-  const [open, setOpen] = useState(false);
+  const { open, setOpen } = useWatchExpansion(watch.id);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const { images } = getWatchDetails(watch);
   function close() { setOpen(false); triggerRef.current?.focus({ preventScroll: true }); }
@@ -89,7 +91,7 @@ function WatchRankingCard({
         </button>
       </div>
 
-      <CollapsibleTrigger ref={triggerRef} className={cn('watch-photo', 'watch-photo-trigger', images.length > 0 && 'has-photo')} aria-label={`${open ? 'Recolher' : 'Expandir'} ${watch.model}`}>
+      <CollapsibleTrigger className={cn('watch-photo', 'watch-photo-trigger', images.length > 0 && 'has-photo')} aria-label={`Ver fotos de ${watch.model}`}>
         <WatchPhoto src={images[0]} alt={`${watch.brand} ${watch.model}`}/>
         {images.length > 1 && <span className="detail-photo-count"><Images size={12}/>{images.length}</span>}
       </CollapsibleTrigger>
@@ -99,7 +101,7 @@ function WatchRankingCard({
           <span className="brand">{watch.brand}</span>
           {index === 0 && <Badge variant="secondary">Próxima compra</Badge>}
         </div>
-        <h3><button type="button" className="watch-name-trigger" onClick={() => setOpen(!open)} aria-expanded={open}>{watch.model}</button></h3>
+        <h3><CollapsibleTrigger ref={triggerRef} className="watch-name-trigger" aria-label={`${open ? 'Recolher' : 'Expandir'} ${watch.model}`}>{watch.model}</CollapsibleTrigger></h3>
         <p className="specs">{watch.specs}</p>
         <button type="button" className="watch-disclosure" onClick={() => setOpen(!open)} aria-expanded={open}>{open ? 'Recolher detalhes' : 'Conhecer o relógio'}<ChevronDown size={14}/></button>
         <div className="row-quick-actions">
@@ -251,6 +253,7 @@ export default function App() {
         </nav>
 
         <div className="header-auth">
+          <ThemeToggle/>
           {user ? (
             <div className="user-profile">
               <span className="user-email" title={user.email}>
