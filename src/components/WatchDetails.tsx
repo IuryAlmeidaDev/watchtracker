@@ -5,6 +5,8 @@ import { Button, buttonVariants } from './ui/button';
 import { cn } from '../lib/utils';
 import { Separator } from './ui/separator';
 import { WatchCarousel } from './WatchCarousel';
+import { watchTags } from '../lib/watch-tags';
+import { Badge } from './ui/badge';
 
 export function WatchDetails({ watch, onClose }: { watch: WatchItem; onClose: () => void }) {
   const { images, facts } = getWatchDetails(watch);
@@ -16,6 +18,7 @@ export function WatchDetails({ watch, onClose }: { watch: WatchItem; onClose: ()
       <section className="technical-details" aria-labelledby={`spec-title-${watch.id}`}>
         <div className="details-heading"><ScanLine size={19} aria-hidden="true"/><h4 id={`spec-title-${watch.id}`}>Cada detalhe conta.</h4></div>
         <p className="details-description">{watch.specs}</p>
+        <div className="watch-tags">{watchTags(watch).map(tag=><Badge key={tag} variant="secondary">{tag}</Badge>)}</div>
         <dl className="technical-grid">{Object.entries(facts).map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
         <div className="purchase-detail">
           <span className="detail-price-label">Valor estimado</span>

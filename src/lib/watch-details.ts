@@ -38,7 +38,7 @@ export function getWatchDetails(watch: WatchItem) {
   const match = details[watch.model.trim().toLowerCase()];
   return {
     images: [...new Set([...watch.images, ...(match?.images ?? [])])],
-    facts: match?.facts ?? { 'Marca': watch.brand, 'Modelo': watch.model, 'Onde encontrar': watch.storeName ?? 'A confirmar' },
+    facts: watch.specifications ?? match?.facts ?? { 'Marca': watch.brand, 'Modelo': watch.model, 'Onde encontrar': watch.storeName ?? 'A confirmar' },
   };
 }
 

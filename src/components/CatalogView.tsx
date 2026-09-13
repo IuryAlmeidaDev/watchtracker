@@ -1,5 +1,10 @@
 import { ArrowUpRight, Plus, Check, Heart } from 'lucide-react';
 import { Button } from './ui/button';
+import { useState } from 'react';
+import { WatchFilters } from './WatchFilters';
+import { WatchEmptyState } from './WatchEmptyState';
+import { filterWatches, watchTags } from '../lib/watch-tags';
+import { Badge } from './ui/badge';
 import { WatchExpandablePhoto } from './WatchExpandablePhoto';
 import type { WatchItem } from '../store/catalogStore';
 
@@ -22,9 +27,14 @@ export function CatalogView({
   onRequireAuth,
   isAuthenticated,
 }: CatalogViewProps) {
+  const [query, setQuery] = useState('');
+  const [selected, setSelected] = useState<string[]>([]);
+  const filtered = filterWatches(watches, query, selected);
   return (
+    <>
+    <WatchFilters query={query} selected={selected} onQuery={setQuery} onSelected={setSelected} count={filtered.length}/>
     <div className="catalog-grid">
-      {watches.map((watch) => {
+      {filtered.map((watch) => {
         const inRanking = rankingIds.includes(watch.id);
         const inCollection = collectionIds.includes(watch.id);
 
@@ -40,6 +50,7 @@ export function CatalogView({
 
               <h3 className="catalog-model">{watch.model}</h3>
               <p className="catalog-specs">{watch.specs}</p>
+              <div className="watch-tags">{watchTags(watch).map(tag=><Badge key={tag} variant="secondary">{tag}</Badge>)}</div>
 
               <div className="catalog-actions">
                 <Button
@@ -78,5 +89,7 @@ export function CatalogView({
         );
       })}
     </div>
+    {!filtered.length && <WatchEmptyState title="Nenhum relógio com essa combinação" description="Remova uma característica ou ajuste a busca para ampliar os resultados." action="Limpar filtros" onAction={()=>{setQuery('');setSelected([]);}}/>}
+    </>
   );
 }

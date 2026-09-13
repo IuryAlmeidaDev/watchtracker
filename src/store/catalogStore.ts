@@ -13,6 +13,8 @@ export interface WatchItem {
   storeName: string | null;
   storeUrl: string | null;
   images: string[];
+  tags?: string[];
+  specifications?: Record<string, string>;
 }
 
 interface CatalogState {
