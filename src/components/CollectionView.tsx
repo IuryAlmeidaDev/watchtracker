@@ -1,5 +1,7 @@
 import { Trash2, ArrowUpRight } from 'lucide-react';
 import { WatchExpandablePhoto } from './WatchExpandablePhoto';
+import { WatchEmptyState } from './WatchEmptyState';
+import { Button } from './ui/button';
 import type { WatchItem } from '../store/catalogStore';
 
 interface CollectionViewProps {
@@ -11,12 +13,7 @@ interface CollectionViewProps {
 export function CollectionView({ collectionWatches, onRemove, onExploreCatalog }: CollectionViewProps) {
   if (collectionWatches.length === 0) {
     return (
-      <div className="empty-collection">
-        <p>Sua coleção pessoal ainda não possui relógios adicionados.</p>
-        <button type="button" className="btn-explore" onClick={onExploreCatalog}>
-          Explorar Catálogo e Adicionar
-        </button>
-      </div>
+      <WatchEmptyState title="Sua coleção começa aqui" description="Sua coleção pessoal ainda não possui relógios adicionados." action="Explorar Catálogo e Adicionar" onAction={onExploreCatalog}/>
     );
   }
 
@@ -36,13 +33,13 @@ export function CollectionView({ collectionWatches, onRemove, onExploreCatalog }
             <p className="catalog-specs">{watch.specs}</p>
 
             <div className="catalog-actions">
-              <button
+              <Button
                 type="button"
-                className="action-btn remove"
+                variant="outline" className="h-11"
                 onClick={() => onRemove(watch.id)}
               >
-                <Trash2 size={14} /> Remover da Coleção
-              </button>
+                <Trash2 data-icon="inline-start" /> Remover da Coleção
+              </Button>
 
               {watch.storeUrl && (
                 <a

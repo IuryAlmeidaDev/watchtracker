@@ -35,6 +35,9 @@ import { useCatalogStore, type WatchItem } from './store/catalogStore';
 import { AuthModal } from './components/AuthModal';
 import { CatalogView } from './components/CatalogView';
 import { CollectionView } from './components/CollectionView';
+import { WatchEmptyState } from './components/WatchEmptyState';
+import { Alert, AlertDescription } from './components/ui/alert';
+import { Button } from './components/ui/button';
 import { WatchPhoto } from './components/WatchPhoto';
 import { WatchDetails } from './components/WatchDetails';
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from './components/ui/collapsible';
@@ -264,18 +267,18 @@ export default function App() {
               </button>
             </div>
           ) : (
-            <button
+            <Button
               type="button"
-              className="btn-signin"
+              variant="outline" className="h-11 px-4"
               onClick={() => setIsAuthModalOpen(true)}
             >
               Entrar
-            </button>
+            </Button>
           )}
         </div>
       </header>
 
-      <main id="main">
+      <main id="main" key={activeTab} className="view-content">
         {activeTab === 'ranking' && (
           <>
             <section className="intro">
@@ -315,9 +318,9 @@ export default function App() {
               </div>
 
               {syncError && (
-                <p role="alert" className="storage-alert">
+                <Alert variant="destructive" className="mb-5"><AlertDescription>
                   Não foi possível salvar na nuvem. Verifique sua conexão.
-                </p>
+                </AlertDescription></Alert>
               )}
 
               <DndContext
@@ -346,16 +349,7 @@ export default function App() {
               </DndContext>
 
               {!orderedRanking.length && (
-                <div className="empty-state">
-                  <p>Seu ranking está vazio.</p>
-                  <button
-                    type="button"
-                    className="btn-explore"
-                    onClick={() => setActiveTab('catalog')}
-                  >
-                    Navegar pelo Catálogo
-                  </button>
-                </div>
+                <WatchEmptyState title="Seu ranking está vazio." description="Explore os modelos e escolha os próximos relógios da sua lista." action="Navegar pelo Catálogo" onAction={() => setActiveTab('catalog')}/>
               )}
               <p className="sr-only" role="status">
                 {announcement}

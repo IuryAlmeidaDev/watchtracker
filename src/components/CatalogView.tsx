@@ -1,4 +1,5 @@
 import { ArrowUpRight, Plus, Check, Heart } from 'lucide-react';
+import { Button } from './ui/button';
 import { WatchExpandablePhoto } from './WatchExpandablePhoto';
 import type { WatchItem } from '../store/catalogStore';
 
@@ -41,25 +42,25 @@ export function CatalogView({
               <p className="catalog-specs">{watch.specs}</p>
 
               <div className="catalog-actions">
-                <button
+                <Button
                   type="button"
-                  className={`action-btn ${inRanking ? 'active' : ''}`}
+                  variant={inRanking ? 'secondary' : 'outline'} className="h-11"
                   onClick={() => (isAuthenticated ? onAddToRanking(watch.id) : onRequireAuth())}
                   disabled={inRanking}
                 >
-                  {inRanking ? <Check size={14} /> : <Heart size={14} />}
-                  {inRanking ? 'No Ranking' : '+ Ranking'}
-                </button>
+                  {inRanking ? <Check data-icon="inline-start" /> : <Heart data-icon="inline-start" />}
+                  {inRanking ? 'No Ranking' : 'Ranking'}
+                </Button>
 
-                <button
+                <Button
                   type="button"
-                  className={`action-btn ${inCollection ? 'active' : ''}`}
+                  variant={inCollection ? 'secondary' : 'outline'} className="h-11"
                   onClick={() => (isAuthenticated ? onAddToCollection(watch.id) : onRequireAuth())}
                   disabled={inCollection}
                 >
-                  {inCollection ? <Check size={14} /> : <Plus size={14} />}
-                  {inCollection ? 'Na Coleção' : '+ Coleção'}
-                </button>
+                  {inCollection ? <Check data-icon="inline-start" /> : <Plus data-icon="inline-start" />}
+                  {inCollection ? 'Na Coleção' : 'Coleção'}
+                </Button>
 
                 {watch.storeUrl && (
                   <a

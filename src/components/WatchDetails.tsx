@@ -1,7 +1,8 @@
 import { ArrowUpRight, ChevronUp, Info, ScanLine } from 'lucide-react';
 import type { WatchItem } from '../store/catalogStore';
 import { getWatchDetails, safeStoreUrl } from '../lib/watch-details';
-import { Button } from './ui/button';
+import { Button, buttonVariants } from './ui/button';
+import { cn } from '../lib/utils';
 import { Separator } from './ui/separator';
 import { WatchCarousel } from './WatchCarousel';
 
@@ -20,9 +21,9 @@ export function WatchDetails({ watch, onClose }: { watch: WatchItem; onClose: ()
           <span className="detail-price-label">Valor estimado</span>
           <p className="detail-price">{watch.priceEstimate}</p>
           <p className="detail-price-note"><Info size={14}/>O preço final pode incluir frete e impostos.</p>
-          {url ? <Button nativeButton={false} render={<a href={url} target="_blank" rel="noopener noreferrer"/>} className="h-11 px-4">
+          {url ? <a href={url} target="_blank" rel="noopener noreferrer" data-slot="button" className={cn(buttonVariants(), 'h-11 px-4')}>
             Abrir anúncio na {watch.storeName ?? 'loja'}<ArrowUpRight data-icon="inline-end"/>
-          </Button> : <p className="detail-pending-link">O link do anúncio ainda não foi adicionado.</p>}
+          </a> : <p className="detail-pending-link">O link do anúncio ainda não foi adicionado.</p>}
         </div>
       </section>
     </div>
