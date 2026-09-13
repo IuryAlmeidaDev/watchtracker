@@ -1,4 +1,4 @@
-﻿{
+{
   "schemaVersion": 2,
   "generatedAt": "2026-09-13T02:50:22.355Z",
   "title": "Design System: WatchTracker",
@@ -7,272 +7,92 @@
       "accent": {
         "role": "primary",
         "displayName": "accent",
-        "canonical": "#c2ceab",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#795638"
       },
       "background": {
         "role": "neutral",
         "displayName": "background",
-        "canonical": "#131614",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#f4efe7"
       },
       "surface": {
         "role": "neutral",
         "displayName": "surface",
-        "canonical": "#1b201c",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#fffaf3"
       },
       "surface-priority": {
         "role": "neutral",
         "displayName": "surface priority",
-        "canonical": "#232a22",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#e8dccb"
       },
       "text": {
         "role": "neutral",
         "displayName": "text",
-        "canonical": "#f0f0e9",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#392d25"
       },
       "muted": {
         "role": "neutral",
         "displayName": "muted",
-        "canonical": "#a6aea6",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#72604f"
       },
       "line": {
         "role": "neutral",
         "displayName": "line",
-        "canonical": "#313731",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#d5c5b3"
       },
       "card-border": {
         "role": "neutral",
         "displayName": "card border",
-        "canonical": "#30382f",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#d5c5b3"
       },
       "priority-border": {
         "role": "neutral",
         "displayName": "priority border",
-        "canonical": "#59654e",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#795638"
       },
       "photo-background": {
         "role": "neutral",
         "displayName": "photo background",
-        "canonical": "#141915",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#eee5d8"
       },
       "photo-label": {
         "role": "neutral",
         "displayName": "photo label",
-        "canonical": "#9da799",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#72604f"
       },
       "count-background": {
         "role": "neutral",
         "displayName": "count background",
-        "canonical": "#2a3228",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#e8dccb"
       },
       "priority-background": {
         "role": "neutral",
         "displayName": "priority background",
-        "canonical": "#36422e",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#e8dccb"
       },
       "priority-text": {
         "role": "neutral",
         "displayName": "priority text",
-        "canonical": "#d5e3c4",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#523923"
       },
       "tag-text": {
         "role": "neutral",
         "displayName": "tag text",
-        "canonical": "#c3cbc1",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#392d25"
       },
       "tag-border": {
         "role": "neutral",
         "displayName": "tag border",
-        "canonical": "#424b40",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#d5c5b3"
       },
       "control-hover": {
         "role": "neutral",
         "displayName": "control hover",
-        "canonical": "#364032",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#e8dccb"
       },
       "control-hover-text": {
         "role": "neutral",
         "displayName": "control hover text",
-        "canonical": "#eff2e7",
-        "tonalRamp": [
-          "oklch(15% 0.025 135)",
-          "oklch(26% 0.025 135)",
-          "oklch(38% 0.025 135)",
-          "oklch(49% 0.025 135)",
-          "oklch(61% 0.025 135)",
-          "oklch(72% 0.025 135)",
-          "oklch(84% 0.025 135)",
-          "oklch(95% 0.025 135)"
-        ]
+        "canonical": "#392d25"
       }
     },
     "typographyMeta": {
@@ -316,7 +136,15 @@
         "name": "tablet-max",
         "value": "1050px"
       }
-    ]
+    ],
+    "darkTheme": {
+      "background": "#211c18",
+      "surface": "#2b241e",
+      "text": "#f4eade",
+      "muted": "#c5b39e",
+      "accent": "#d2af87",
+      "line": "#554536"
+    }
   },
   "components": [
     {
@@ -325,7 +153,7 @@
       "refersTo": "move-button",
       "description": "Explicit reorder control; disable at list boundaries.",
       "html": "<button class=\"ds-move\" aria-label=\"Subir relógio\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"m5 12 7-7 7 7M12 19V5\"/></svg></button>",
-      "css": ".ds-move{font:inherit;border:0;background:none;min-width:30px;height:36px;display:grid;place-items:center;border-radius:5px;color:var(--muted,#a6aea6);cursor:pointer}.ds-move:hover:not(:disabled){background:#364032;color:#eff2e7}.ds-move:disabled{opacity:.25;cursor:default}.ds-move:focus-visible{outline:2px solid var(--accent,#c2ceab);outline-offset:5px}"
+      "css": ".ds-move{font:inherit;border:0;background:none;min-width:30px;height:36px;display:grid;place-items:center;border-radius:5px;color:var(--muted,#72604f);cursor:pointer}.ds-move:hover:not(:disabled){background:#e8dccb;color:#392d25}.ds-move:disabled{opacity:.25;cursor:default}.ds-move:focus-visible{outline:2px solid var(--accent,#795638);outline-offset:5px}"
     },
     {
       "name": "Style tag",
@@ -333,7 +161,7 @@
       "refersTo": "style-tag",
       "description": "Noninteractive watch style metadata.",
       "html": "<span class=\"ds-tag\">Casual</span>",
-      "css": ".ds-tag{font:11px 'DM Sans',sans-serif;color:#c3cbc1;border:1px solid #424b40;border-radius:4px;padding:2px 7px;display:inline-block}"
+      "css": ".ds-tag{font:11px 'DM Sans',sans-serif;color:#392d25;border:1px solid #d5c5b3;border-radius:4px;padding:2px 7px;display:inline-block}"
     },
     {
       "name": "Priority badge",
@@ -341,7 +169,7 @@
       "refersTo": "priority-badge",
       "description": "First-ranked watch only.",
       "html": "<span class=\"ds-priority\">Próxima compra</span>",
-      "css": ".ds-priority{font:10px 'DM Sans',sans-serif;background:#36422e;color:#d5e3c4;padding:3px 7px;border-radius:4px}"
+      "css": ".ds-priority{font:10px 'DM Sans',sans-serif;background:#e8dccb;color:#523923;padding:3px 7px;border-radius:4px}"
     },
     {
       "name": "Watch surface",
@@ -349,7 +177,7 @@
       "refersTo": "watch-card",
       "description": "Flat ranking surface with estimated price hierarchy.",
       "html": "<article class=\"ds-card\"><h3 class=\"ds-title\">Nome do relógio</h3><p class=\"ds-label\">Valor médio estimado</p><p class=\"ds-price\">≈ R$ 500</p></article>",
-      "css": ".ds-card{padding:22px;background:#1b201c;border:1px solid #30382f;border-radius:12px;color:#f0f0e9}.ds-title{font:600 17px/1.4 Manrope,sans-serif;letter-spacing:-.4px;margin:6px 0 9px}.ds-label{font:10px 'DM Sans',sans-serif;color:var(--muted,#a6aea6)}.ds-price{font:22px Manrope,sans-serif;letter-spacing:-.6px;font-variant-numeric:tabular-nums;margin:4px 0 16px}"
+      "css": ".ds-card{padding:22px;background:#fffaf3;border:1px solid #d5c5b3;border-radius:12px;color:#392d25}.ds-title{font:600 17px/1.4 Manrope,sans-serif;letter-spacing:-.4px;margin:6px 0 9px}.ds-label{font:10px 'DM Sans',sans-serif;color:var(--muted,#72604f)}.ds-price{font:22px Manrope,sans-serif;letter-spacing:-.6px;font-variant-numeric:tabular-nums;margin:4px 0 16px}"
     },
     {
       "name": "Photo placeholder",
@@ -357,7 +185,7 @@
       "refersTo": "photo-placeholder",
       "description": "Explicitly deferred or failed photo.",
       "html": "<div class=\"ds-photo\"><svg width=\"26\" height=\"26\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\"><rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\"/><circle cx=\"9\" cy=\"9\" r=\"2\"/><path d=\"m21 15-5-5L5 21\"/></svg><span>Foto em breve</span></div>",
-      "css": ".ds-photo{width:130px;height:142px;background:#141915;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#9da799;font:11px 'DM Sans',sans-serif}"
+      "css": ".ds-photo{width:130px;height:142px;background:#eee5d8;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#72604f;font:11px 'DM Sans',sans-serif}"
     }
   ],
   "narrative": {
