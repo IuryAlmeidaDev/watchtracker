@@ -55,13 +55,19 @@ export const useCatalogStore = create<CatalogState>((set, get) => ({
 
     // Fallback se o Supabase não estiver configurado ou usuário não logado
     if (!isSupabaseConfigured) {
+      if (!userId) {
+        set({
+          rankingIds: initialLocalWatches.map((w) => w.id),
+          collectionIds: [],
+        });
+      }
       set({ loading: false });
       return;
     }
 
     try {
       // 1. Carregar catálogo público e imagens
-      const { data: dbWatches } = await supabase
+      const { data: dbWatches, error: watchesError } = await supabase
         .from('watches')
         .select(`
           id, brand, model, reference, price_estimate, specs, store_name, store_url, created_at,
@@ -69,7 +75,9 @@ export const useCatalogStore = create<CatalogState>((set, get) => ({
         `)
         .order('brand', { ascending: true });
 
-      if (dbWatches && dbWatches.length > 0) {
+      if (watchesError) {
+        set({ syncError: true });
+      } else if (dbWatches && dbWatches.length > 0) {
         const formatted: WatchItem[] = (dbWatches as (WatchRecord & { watch_images: { image_url: string; display_order: number }[] })[]).map((w) => ({
           id: w.id,
           brand: w.brand,
@@ -85,19 +93,27 @@ export const useCatalogStore = create<CatalogState>((set, get) => ({
         set({ watches: formatted });
       }
 
-      // 2. Se o usuário estiver logado, carregar seu ranking e coleção
+      // 2. Se o usuário estiver logado, carregar seu ranking e coleção; caso contrário, resetar para o padrão
       if (userId) {
         const [rankingRes, collectionRes] = await Promise.all([
           supabase.from('user_rankings').select('watch_id, position').eq('user_id', userId).order('position'),
           supabase.from('user_collections').select('watch_id').eq('user_id', userId),
         ]);
 
+        if (rankingRes.error || collectionRes.error) {
+          set({ syncError: true });
+        }
         if (rankingRes.data) {
           set({ rankingIds: rankingRes.data.map((r) => r.watch_id) });
         }
         if (collectionRes.data) {
           set({ collectionIds: collectionRes.data.map((c) => c.watch_id) });
         }
+      } else {
+        set({
+          rankingIds: initialLocalWatches.map((w) => w.id),
+          collectionIds: [],
+        });
       }
     } catch {
       set({ syncError: true });
@@ -130,7 +146,8 @@ export const useCatalogStore = create<CatalogState>((set, get) => ({
     set({ rankingIds: updated });
 
     if (userId && isSupabaseConfigured) {
-      await supabase.from('user_rankings').delete().eq('user_id', userId).eq('watch_id', watchId);
+      const { error } = await supabase.from('user_rankings').delete().eq('user_id', userId).eq('watch_id', watchId);
+      if (error) set({ syncError: true });
     }
   },
 
@@ -181,7 +198,8 @@ export const useCatalogStore = create<CatalogState>((set, get) => ({
     set({ collectionIds: updated });
 
     if (userId && isSupabaseConfigured) {
-      await supabase.from('user_collections').delete().eq('user_id', userId).eq('watch_id', watchId);
+      const { error } = await supabase.from('user_collections').delete().eq('user_id', userId).eq('watch_id', watchId);
+      if (error) set({ syncError: true });
     }
   },
 
