@@ -68,12 +68,18 @@ async function seed() {
       const baseName = path.basename(item.imagem, path.extname(item.imagem));
       const watchDir = path.join(process.cwd(), 'public', 'watches');
       const allFiles = fs.readdirSync(watchDir);
+      const coverFileName = path.basename(item.imagem);
+      const validExtensions = new Set(['.png', '.jpg', '.jpeg', '.webp']);
       const matchingFiles = allFiles
-        .filter((file) => file.startsWith(baseName))
+        .filter((file) => file.startsWith(baseName) && validExtensions.has(path.extname(file).toLowerCase()))
         .sort((a, b) => a.localeCompare(b));
 
-      for (let i = 0; i < matchingFiles.length; i++) {
-        const fileName = matchingFiles[i];
+      const orderedFiles = matchingFiles.includes(coverFileName)
+        ? [coverFileName, ...matchingFiles.filter((f) => f !== coverFileName)]
+        : matchingFiles;
+
+      for (let i = 0; i < orderedFiles.length; i++) {
+        const fileName = orderedFiles[i];
         const localImagePath = path.join(watchDir, fileName);
         const fileBuffer = fs.readFileSync(localImagePath);
         const storagePath = `watches/${watch.id}/${fileName}`;

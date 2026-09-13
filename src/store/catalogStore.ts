@@ -75,6 +75,8 @@ export const useCatalogStore = create<CatalogState>((set, get) => ({
         `)
         .order('brand', { ascending: true });
 
+      let currentWatches = get().watches;
+
       if (watchesError) {
         set({ syncError: true });
       } else if (dbWatches && dbWatches.length > 0) {
@@ -90,7 +92,30 @@ export const useCatalogStore = create<CatalogState>((set, get) => ({
             ? w.watch_images.sort((a, b) => a.display_order - b.display_order).map((img) => img.image_url)
             : [],
         }));
-        set({ watches: formatted });
+
+        // Combinar os relógios do banco com os relógios locais para garantir que novos modelos sempre apareçam
+        const dbMap = new Map<string, WatchItem>();
+        for (const w of formatted) {
+          dbMap.set(`${w.brand.toLowerCase()}::${w.model.toLowerCase()}`, w);
+        }
+
+        const combinedWatches: WatchItem[] = [];
+        for (const local of initialLocalWatches) {
+          const key = `${local.marca.toLowerCase()}::${local.nome.toLowerCase()}`;
+          const fromDb = dbMap.get(key);
+          if (fromDb) {
+            combinedWatches.push(fromDb);
+            dbMap.delete(key);
+          } else {
+            combinedWatches.push(mapLegacyWatch(local));
+          }
+        }
+        for (const extra of dbMap.values()) {
+          combinedWatches.push(extra);
+        }
+
+        currentWatches = combinedWatches;
+        set({ watches: combinedWatches });
       }
 
       // 2. Se o usuário estiver logado, carregar seu ranking e coleção; caso contrário, resetar para o padrão
@@ -111,7 +136,7 @@ export const useCatalogStore = create<CatalogState>((set, get) => ({
         }
       } else {
         set({
-          rankingIds: initialLocalWatches.map((w) => w.id),
+          rankingIds: currentWatches.map((w) => w.id),
           collectionIds: [],
         });
       }
