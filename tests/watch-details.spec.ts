@@ -25,7 +25,7 @@ test('expansion, photo controls, stacked details, keyboard and focus', async ({p
  expect(next!.y).toBeGreaterThan(photo!.y);
  expect(next!.y + next!.height).toBeLessThan(photo!.y + photo!.height);
  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
- await page.locator('[data-watch-id="5"]').screenshot({path:`test-results/details-${info.project.name}.png`});
+ await page.getByRole('dialog').screenshot({path:`test-results/details-${info.project.name}.png`});
  await page.keyboard.press('Escape');
  await expect(panel).not.toBeVisible();
  await expect(trigger).toBeFocused();
@@ -35,6 +35,8 @@ test('catalog details and missing photography',async({page})=>{
  await page.getByRole('button',{name:'Expandir MY-H3-C Silvery',exact:true}).click();
  await expect(page.getByTestId('details-5')).toBeVisible();
  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await page.keyboard.press('Escape');
+ await expect(page.getByRole('dialog')).not.toBeVisible();
  await page.getByRole('button',{name:/Meu Ranking/}).click();
  await page.getByRole('button',{name:'Expandir Piloto Automático 36mm (NH35)',exact:true}).click();
  await expect(page.getByText('Um olhar mais de perto, em breve.')).toBeVisible();

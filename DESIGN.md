@@ -171,3 +171,7 @@ Review evidence: .impeccable/review/desktop.png and .impeccable/review/mobile.pn
 ## Theme and expansion update
 
 Light mode is the default: warm paper, beige surfaces, walnut actions. Dark mode uses brown surfaces and warm cream text; the header toggle persists locally. Only one watch expands at a time. Expanded covers are hidden, with a single gallery above the specifications. Gallery stage: 480px desktop and 320px mobile, maximum width 640px. Panel opening uses 420ms and closing 300ms, respecting reduced motion.
+
+## Focused watch dialog
+Watch details now open in a modal instead of expanding the list. Width is capped at 880px; the header remains visible above an internally scrolling body. Entrance uses 650ms opacity and scale, exit 500ms, with reduced-motion support. Gallery dimensions and warm themes remain unchanged.
+

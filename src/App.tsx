@@ -41,8 +41,8 @@ import { Button } from './components/ui/button';
 import { ThemeToggle } from './components/ThemeToggle';
 import { useWatchExpansion } from './store/appearanceStore';
 import { WatchPhoto } from './components/WatchPhoto';
-import { WatchDetails } from './components/WatchDetails';
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from './components/ui/collapsible';
+import { WatchDialogContent } from './components/WatchDialogContent';
+import { Dialog, DialogTrigger } from './components/ui/dialog';
 import { Badge } from './components/ui/badge';
 import { getWatchDetails } from './lib/watch-details';
 import { cn } from './lib/utils';
@@ -68,7 +68,7 @@ function WatchRankingCard({
   const { open, setOpen } = useWatchExpansion(watch.id);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const { images } = getWatchDetails(watch);
-  function close() { setOpen(false); triggerRef.current?.focus({ preventScroll: true }); }
+  function close() { setOpen(false); }
 
   return (
     <li
@@ -77,7 +77,7 @@ function WatchRankingCard({
       className={cn('watch-row', 'expandable-watch', isDragging && 'dragging', open && 'is-open')}
       data-watch-id={watch.id}
     >
-      <Collapsible open={open} onOpenChange={setOpen} onKeyDown={event => { if (event.key === 'Escape' && open && !isDragging) { event.stopPropagation(); close(); } }}>
+      <Dialog open={open} onOpenChange={setOpen}>
       <div className="watch-summary">
       <div className="rank">
         <span>{String(index + 1).padStart(2, '0')}</span>
@@ -91,17 +91,17 @@ function WatchRankingCard({
         </button>
       </div>
 
-      <CollapsibleTrigger className={cn('watch-photo', 'watch-photo-trigger', images.length > 0 && 'has-photo')} aria-label={`Ver fotos de ${watch.model}`}>
+      <DialogTrigger className={cn('watch-photo', 'watch-photo-trigger', images.length > 0 && 'has-photo')} aria-label={`Ver fotos de ${watch.model}`}>
         <WatchPhoto src={images[0]} alt={`${watch.brand} ${watch.model}`}/>
         {images.length > 1 && <span className="detail-photo-count"><Images size={12}/>{images.length}</span>}
-      </CollapsibleTrigger>
+      </DialogTrigger>
 
       <div className="watch-info">
         <div className="brand-line">
           <span className="brand">{watch.brand}</span>
           {index === 0 && <Badge variant="secondary">Próxima compra</Badge>}
         </div>
-        <h3><CollapsibleTrigger ref={triggerRef} className="watch-name-trigger" aria-label={`${open ? 'Recolher' : 'Expandir'} ${watch.model}`}>{watch.model}</CollapsibleTrigger></h3>
+        <h3><DialogTrigger ref={triggerRef} className="watch-name-trigger" aria-label={`${open ? 'Recolher' : 'Expandir'} ${watch.model}`}>{watch.model}</DialogTrigger></h3>
         <p className="specs">{watch.specs}</p>
         <button type="button" className="watch-disclosure" onClick={() => setOpen(!open)} aria-expanded={open}>{open ? 'Recolher detalhes' : 'Conhecer o relógio'}<ChevronDown size={14}/></button>
         <div className="row-quick-actions">
@@ -154,8 +154,8 @@ function WatchRankingCard({
         </button>
       </div>
       </div>
-      <CollapsibleContent className="watch-expansion"><WatchDetails watch={watch} onClose={close}/></CollapsibleContent>
-      </Collapsible>
+      <WatchDialogContent watch={watch} onClose={close}/>
+      </Dialog>
     </li>
   );
 }

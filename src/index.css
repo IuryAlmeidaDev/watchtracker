@@ -770,3 +770,22 @@ html { background: var(--tone-canvas); color: var(--tone-ink); }
  .header-auth .user-email { display: none; }
 }
 @media (prefers-reduced-motion:reduce) { .watch-expansion { transition: none; } }
+/* Focused watch viewer: slower, continuous entrance and exit. */
+[data-slot=dialog-overlay] { background: rgb(28 21 16 / .6); backdrop-filter: blur(5px); animation: none; opacity: 1; transition: opacity 600ms ease; }
+[data-slot=dialog-overlay][data-starting-style], [data-slot=dialog-overlay][data-ending-style] { opacity: 0; }
+.watch-dialog[data-slot=dialog-content] { width: min(880px, calc(100vw - 40px)); max-width: 880px; max-height: calc(100dvh - 48px); padding: 0; gap: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--tone-surface); color: var(--tone-ink); border-radius: 16px; animation: none; opacity: 1; scale: 1; transition: opacity 650ms ease, scale 650ms cubic-bezier(.22,1,.36,1); }
+.watch-dialog[data-starting-style], .watch-dialog[data-ending-style] { opacity: 0; scale: .96; }
+.watch-dialog[data-ending-style] { transition-duration: 500ms; }
+.watch-dialog-header { position: relative; padding: 24px 76px 20px 28px; flex-shrink: 0; border-bottom: 1px solid var(--tone-line); }
+.watch-dialog-header [data-slot=dialog-title] { font-family: Manrope,sans-serif; font-size: 22px; line-height: 1.4; }
+.watch-dialog-close { position: absolute; top: 16px; right: 16px; }
+.watch-dialog-body { overflow-y: auto; overscroll-behavior: contain; min-height: 0; }
+.watch-dialog .watch-details > [data-slot=separator] { display: none; }
+.watch-dialog .details-grid { padding-top: 24px; }
+@media(max-width:767px) {
+ .watch-dialog[data-slot=dialog-content] { width: calc(100vw - 20px); max-height: calc(100dvh - 24px); }
+ .watch-dialog-header { padding: 20px 64px 16px 20px; }
+ .watch-dialog-header [data-slot=dialog-title] { font-size: 18px; }
+ .watch-dialog-close { top: 12px; right: 8px; }
+}
+@media(prefers-reduced-motion:reduce) { .watch-dialog[data-slot=dialog-content], [data-slot=dialog-overlay] { transition: none; } }

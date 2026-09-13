@@ -1,4 +1,4 @@
-import { ArrowUpRight, ChevronUp, Info, ScanLine } from 'lucide-react';
+import { ArrowUpRight, X, Info, ScanLine } from 'lucide-react';
 import type { WatchItem } from '../store/catalogStore';
 import { getWatchDetails, safeStoreUrl } from '../lib/watch-details';
 import { Button, buttonVariants } from './ui/button';
@@ -27,6 +27,6 @@ export function WatchDetails({ watch, onClose }: { watch: WatchItem; onClose: ()
         </div>
       </section>
     </div>
-    <div className="details-bottom"><span>Seu próximo relógio começa nos detalhes.</span><Button variant="ghost" className="h-11" onClick={onClose}><ChevronUp data-icon="inline-start"/>Recolher detalhes</Button></div>
+    <div className="details-bottom"><span>Seu próximo relógio começa nos detalhes.</span><Button variant="ghost" className="h-11" onClick={onClose}><X data-icon="inline-start"/>Fechar detalhes</Button></div>
   </div>;
 }
