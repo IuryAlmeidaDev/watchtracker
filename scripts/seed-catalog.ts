@@ -63,12 +63,19 @@ async function seed() {
 
     console.log(`Relógio registrado: ${item.marca} ${item.nome} (${watch.id})`);
 
-    // Upload de imagem caso exista localmente em public/
+    // Upload de imagens caso existam localmente em public/
     if (item.imagem && item.imagem.startsWith('/watches/')) {
-      const localImagePath = path.join(process.cwd(), 'public', item.imagem);
-      if (fs.existsSync(localImagePath)) {
+      const baseName = path.basename(item.imagem, path.extname(item.imagem));
+      const watchDir = path.join(process.cwd(), 'public', 'watches');
+      const allFiles = fs.readdirSync(watchDir);
+      const matchingFiles = allFiles
+        .filter((file) => file.startsWith(baseName))
+        .sort((a, b) => a.localeCompare(b));
+
+      for (let i = 0; i < matchingFiles.length; i++) {
+        const fileName = matchingFiles[i];
+        const localImagePath = path.join(watchDir, fileName);
         const fileBuffer = fs.readFileSync(localImagePath);
-        const fileName = path.basename(item.imagem);
         const storagePath = `watches/${watch.id}/${fileName}`;
         const contentType = getContentType(fileName);
 
@@ -89,11 +96,11 @@ async function seed() {
           await supabase.from('watch_images').upsert({
             watch_id: watch.id,
             image_url: publicUrlData.publicUrl,
-            display_order: 0,
-            is_cover: true,
+            display_order: i,
+            is_cover: i === 0,
           }, { onConflict: 'watch_id,image_url' });
 
-          console.log(`Foto enviada com sucesso: ${publicUrlData.publicUrl}`);
+          console.log(`Foto enviada (${i + 1}/${matchingFiles.length}): ${publicUrlData.publicUrl}`);
         }
       }
     }
