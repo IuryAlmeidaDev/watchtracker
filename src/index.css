@@ -468,6 +468,11 @@
   border-color: var(--color-priority-border, #59654e);
 }
 
+.action-btn.active:disabled {
+  opacity: 0.85;
+  cursor: default;
+}
+
 .action-btn.remove {
   color: #fca5a5;
 }
@@ -503,3 +508,24 @@
   cursor: pointer;
   font-size: 13px;
 }
+
+@media (max-width: 767px) {
+  .site-header {
+    height: auto;
+    flex-wrap: wrap;
+    padding: 12px 0;
+    gap: 10px;
+  }
+  .header-nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-tab {
+    white-space: nowrap;
+    font-size: 13px;
+  }
+}
+

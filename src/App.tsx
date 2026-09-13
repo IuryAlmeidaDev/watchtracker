@@ -285,7 +285,7 @@ export default function App() {
                 </div>
                 <span className="saved-status">
                   <Check size={14} />
-                  {user ? 'Sincronizado na nuvem' : 'Salvo neste navegador'}
+                  {user ? 'Sincronizado na nuvem' : 'Modo visitante (faça login para salvar)'}
                 </span>
               </div>
               <div className="list-caption">
