@@ -1,0 +1,384 @@
+﻿{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-13T02:50:22.355Z",
+  "title": "Design System: WatchTracker",
+  "extensions": {
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "accent",
+        "canonical": "#c2ceab",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "background",
+        "canonical": "#131614",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "surface",
+        "canonical": "#1b201c",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "surface-priority": {
+        "role": "neutral",
+        "displayName": "surface priority",
+        "canonical": "#232a22",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "text",
+        "canonical": "#f0f0e9",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "muted",
+        "canonical": "#a6aea6",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "line",
+        "canonical": "#313731",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "card-border": {
+        "role": "neutral",
+        "displayName": "card border",
+        "canonical": "#30382f",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "priority-border": {
+        "role": "neutral",
+        "displayName": "priority border",
+        "canonical": "#59654e",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "photo-background": {
+        "role": "neutral",
+        "displayName": "photo background",
+        "canonical": "#141915",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "photo-label": {
+        "role": "neutral",
+        "displayName": "photo label",
+        "canonical": "#9da799",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "count-background": {
+        "role": "neutral",
+        "displayName": "count background",
+        "canonical": "#2a3228",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "priority-background": {
+        "role": "neutral",
+        "displayName": "priority background",
+        "canonical": "#36422e",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "priority-text": {
+        "role": "neutral",
+        "displayName": "priority text",
+        "canonical": "#d5e3c4",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "tag-text": {
+        "role": "neutral",
+        "displayName": "tag text",
+        "canonical": "#c3cbc1",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "tag-border": {
+        "role": "neutral",
+        "displayName": "tag border",
+        "canonical": "#424b40",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "control-hover": {
+        "role": "neutral",
+        "displayName": "control hover",
+        "canonical": "#364032",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      },
+      "control-hover-text": {
+        "role": "neutral",
+        "displayName": "control hover text",
+        "canonical": "#eff2e7",
+        "tonalRamp": [
+          "oklch(15% 0.025 135)",
+          "oklch(26% 0.025 135)",
+          "oklch(38% 0.025 135)",
+          "oklch(49% 0.025 135)",
+          "oklch(61% 0.025 135)",
+          "oklch(72% 0.025 135)",
+          "oklch(84% 0.025 135)",
+          "oklch(95% 0.025 135)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Two-line introduction"
+      },
+      "title": {
+        "displayName": "Watch title",
+        "purpose": "Model identity"
+      },
+      "price": {
+        "displayName": "Price",
+        "purpose": "Estimated BRL values with tabular numerals"
+      }
+    },
+    "shadows": [
+      {
+        "name": "dragging",
+        "value": "0 14px 35px #0008",
+        "purpose": "Dragged row only; z-index 10 and opacity 0.85."
+      }
+    ],
+    "motion": [
+      {
+        "name": "reduced-motion",
+        "value": "none",
+        "purpose": "Disable transitions and animations when prefers-reduced-motion is reduce."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile-max",
+        "value": "767px"
+      },
+      {
+        "name": "tablet-min",
+        "value": "768px"
+      },
+      {
+        "name": "tablet-max",
+        "value": "1050px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Move button",
+      "kind": "button",
+      "refersTo": "move-button",
+      "description": "Explicit reorder control; disable at list boundaries.",
+      "html": "<button class=\"ds-move\" aria-label=\"Subir relógio\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"m5 12 7-7 7 7M12 19V5\"/></svg></button>",
+      "css": ".ds-move{font:inherit;border:0;background:none;min-width:30px;height:36px;display:grid;place-items:center;border-radius:5px;color:var(--muted,#a6aea6);cursor:pointer}.ds-move:hover:not(:disabled){background:#364032;color:#eff2e7}.ds-move:disabled{opacity:.25;cursor:default}.ds-move:focus-visible{outline:2px solid var(--accent,#c2ceab);outline-offset:5px}"
+    },
+    {
+      "name": "Style tag",
+      "kind": "chip",
+      "refersTo": "style-tag",
+      "description": "Noninteractive watch style metadata.",
+      "html": "<span class=\"ds-tag\">Casual</span>",
+      "css": ".ds-tag{font:11px 'DM Sans',sans-serif;color:#c3cbc1;border:1px solid #424b40;border-radius:4px;padding:2px 7px;display:inline-block}"
+    },
+    {
+      "name": "Priority badge",
+      "kind": "chip",
+      "refersTo": "priority-badge",
+      "description": "First-ranked watch only.",
+      "html": "<span class=\"ds-priority\">Próxima compra</span>",
+      "css": ".ds-priority{font:10px 'DM Sans',sans-serif;background:#36422e;color:#d5e3c4;padding:3px 7px;border-radius:4px}"
+    },
+    {
+      "name": "Watch surface",
+      "kind": "card",
+      "refersTo": "watch-card",
+      "description": "Flat ranking surface with estimated price hierarchy.",
+      "html": "<article class=\"ds-card\"><h3 class=\"ds-title\">Nome do relógio</h3><p class=\"ds-label\">Valor médio estimado</p><p class=\"ds-price\">≈ R$ 500</p></article>",
+      "css": ".ds-card{padding:22px;background:#1b201c;border:1px solid #30382f;border-radius:12px;color:#f0f0e9}.ds-title{font:600 17px/1.4 Manrope,sans-serif;letter-spacing:-.4px;margin:6px 0 9px}.ds-label{font:10px 'DM Sans',sans-serif;color:var(--muted,#a6aea6)}.ds-price{font:22px Manrope,sans-serif;letter-spacing:-.6px;font-variant-numeric:tabular-nums;margin:4px 0 16px}"
+    },
+    {
+      "name": "Photo placeholder",
+      "kind": "custom",
+      "refersTo": "photo-placeholder",
+      "description": "Explicitly deferred or failed photo.",
+      "html": "<div class=\"ds-photo\"><svg width=\"26\" height=\"26\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\"><rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\"/><circle cx=\"9\" cy=\"9\" r=\"2\"/><path d=\"m21 15-5-5L5 21\"/></svg><span>Foto em breve</span></div>",
+      "css": ".ds-photo{width:130px;height:142px;background:#141915;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#9da799;font:11px 'DM Sans',sans-serif}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Personal Watch Ranking",
+    "overview": "A compact editorial introduction leads into a practical, vertically ordered collection. Dark green neutrals and a muted sage accent make the first choice legible without overwhelming watch names, specifications, or prices.\n\nThe visual system is restrained and operational: clear position numbers, quiet metadata, and explicit reorder controls. This document refreshes the original design brief from the shipped implementation in src/index.css and src/App.tsx.",
+    "keyCharacteristics": [
+      "Dark tonal surfaces with fine borders.",
+      "Manrope titles and prices paired with DM Sans body copy.",
+      "A persistent vertical ranking with a distinct first item.",
+      "Explicit placeholders and visible keyboard focus."
+    ],
+    "rules": [],
+    "dos": [
+      "Do preserve the vertical ranking and first-position emphasis.",
+      "Do keep prices labeled as estimates and pending assets explicitly described.",
+      "Do retain keyboard sorting, move controls, visible focus, and reduced-motion support."
+    ],
+    "donts": [
+      "Don't substitute an unrelated watch photograph for a missing asset.",
+      "Don't style missing store links as active buttons.",
+      "Don't add resting shadows or ornamental surfaces that compete with the ranking."
+    ]
+  }
+}
