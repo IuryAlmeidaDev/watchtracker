@@ -16,6 +16,25 @@ if (!supabaseUrl || !serviceRoleKey) {
 
 const supabase = createClient(supabaseUrl, serviceRoleKey);
 
+function getContentType(filePath: string): string {
+  const ext = path.extname(filePath).toLowerCase();
+  switch (ext) {
+    case '.jpg':
+    case '.jpeg':
+      return 'image/jpeg';
+    case '.png':
+      return 'image/png';
+    case '.webp':
+      return 'image/webp';
+    case '.gif':
+      return 'image/gif';
+    case '.svg':
+      return 'image/svg+xml';
+    default:
+      return 'application/octet-stream';
+  }
+}
+
 async function seed() {
   console.log('--- Iniciando Seed do Catálogo no Supabase ---');
 
@@ -51,11 +70,12 @@ async function seed() {
         const fileBuffer = fs.readFileSync(localImagePath);
         const fileName = path.basename(item.imagem);
         const storagePath = `watches/${watch.id}/${fileName}`;
+        const contentType = getContentType(fileName);
 
         const { error: uploadError } = await supabase.storage
           .from('watch-photos')
           .upload(storagePath, fileBuffer, {
-            contentType: 'image/jpeg',
+            contentType,
             upsert: true,
           });
 

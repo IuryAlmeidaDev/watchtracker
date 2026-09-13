@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS public.watches (
     specs TEXT NOT NULL,
     store_name TEXT,
     store_url TEXT,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    CONSTRAINT watches_brand_model_unique UNIQUE (brand, model)
 );
 
 -- 2. Tabela de Imagens dos Relógios (múltiplas fotos por relógio)
@@ -21,7 +22,8 @@ CREATE TABLE IF NOT EXISTS public.watch_images (
     image_url TEXT NOT NULL,
     display_order INTEGER NOT NULL DEFAULT 0,
     is_cover BOOLEAN NOT NULL DEFAULT false,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    CONSTRAINT watch_images_watch_url_unique UNIQUE (watch_id, image_url)
 );
 
 -- 3. Tabela do Ranking de Próximas Compras do Usuário
