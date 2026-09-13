@@ -4,7 +4,7 @@ test.beforeEach(async ({page}) => {
  await page.emulateMedia({reducedMotion:'reduce'});
  await page.goto('/');
 });
-test('expansion, thumbnails, keyboard and focus', async ({page}, info) => {
+test('expansion, photo controls, stacked details, keyboard and focus', async ({page}, info) => {
  const trigger=page.getByRole('button',{name:'Expandir MY-H3-C Silvery',exact:true});
  await trigger.click();
  const panel=page.getByTestId('details-5');
@@ -12,12 +12,18 @@ test('expansion, thumbnails, keyboard and focus', async ({page}, info) => {
  await expect(panel.getByText('Quartzo Miyota 2115', {exact:true})).toBeVisible();
  await panel.getByRole('button',{name:'Próxima foto',exact:true}).click();
  await expect(panel.locator('.detail-gallery-count')).toHaveText('02 / 04');
- await panel.getByRole('button',{name:'Ver foto 4 de MY-H3-C Silvery',exact:true}).click();
- await expect(panel.locator('.detail-gallery-count')).toHaveText('04 / 04');
  await panel.getByRole('region',{name:'Fotos de MY-H3-C Silvery'}).focus();
  await page.keyboard.press('ArrowLeft');
- await expect(panel.locator('.detail-gallery-count')).toHaveText('03 / 04');
- await panel.getByRole('button',{name:'Ver foto 1 de MY-H3-C Silvery',exact:true}).click();
+ await expect(panel.locator('.detail-gallery-count')).toHaveText('01 / 04');
+ await expect(panel.locator('.detail-thumbnails')).toHaveCount(0);
+ const photo = await panel.locator('.detail-gallery-stage').first().boundingBox();
+ const description = await panel.locator('.technical-details').boundingBox();
+ const next = await panel.getByRole('button',{name:'Próxima foto',exact:true}).boundingBox();
+ expect(description!.y).toBeGreaterThan(photo!.y + photo!.height);
+ expect(next!.x).toBeGreaterThanOrEqual(photo!.x);
+ expect(next!.x + next!.width).toBeLessThanOrEqual(photo!.x + photo!.width);
+ expect(next!.y).toBeGreaterThan(photo!.y);
+ expect(next!.y + next!.height).toBeLessThan(photo!.y + photo!.height);
  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  await page.locator('[data-watch-id="5"]').screenshot({path:`test-results/details-${info.project.name}.png`});
  await page.keyboard.press('Escape');
