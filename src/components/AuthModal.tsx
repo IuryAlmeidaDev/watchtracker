@@ -26,6 +26,21 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
     }
   }, [isOpen, defaultMode, clearError]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   async function handleSubmit(e: React.FormEvent) {
@@ -55,10 +70,10 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
 
   return (
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
-      <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-card" onClick={(e) => e.stopPropagation()} aria-labelledby="auth-modal-title">
         <div className="modal-header">
           <div>
-            <h2 className="modal-title">{mode === 'login' ? 'Acessar Conta' : 'Criar Conta'}</h2>
+            <h2 id="auth-modal-title" className="modal-title">{mode === 'login' ? 'Acessar Conta' : 'Criar Conta'}</h2>
             <p className="modal-subtitle">
               {mode === 'login' 
                 ? 'Entre para salvar seu ranking e sua coleção' 
@@ -101,6 +116,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
               <input
                 id="auth-email"
                 type="email"
+                autoFocus
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
