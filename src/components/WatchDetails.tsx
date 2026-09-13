@@ -1,0 +1,31 @@
+import { ArrowUpRight, ChevronUp, Info, ScanLine } from 'lucide-react';
+import type { WatchItem } from '../store/catalogStore';
+import { getWatchDetails, safeStoreUrl } from '../lib/watch-details';
+import { Button } from './ui/button';
+import { Separator } from './ui/separator';
+import { WatchCarousel } from './WatchCarousel';
+
+export function WatchDetails({ watch, onClose }: { watch: WatchItem; onClose: () => void }) {
+  const { images, facts } = getWatchDetails(watch);
+  const url = safeStoreUrl(watch.storeUrl);
+  return <div className="watch-details" data-testid={`details-${watch.id}`}>
+    <Separator/>
+    <div className="details-grid">
+      <WatchCarousel images={images} model={watch.model}/>
+      <section className="technical-details" aria-labelledby={`spec-title-${watch.id}`}>
+        <div className="details-heading"><ScanLine size={19} aria-hidden="true"/><h4 id={`spec-title-${watch.id}`}>Cada detalhe conta.</h4></div>
+        <p className="details-description">{watch.specs}</p>
+        <dl className="technical-grid">{Object.entries(facts).map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+        <div className="purchase-detail">
+          <span className="detail-price-label">Valor estimado</span>
+          <p className="detail-price">{watch.priceEstimate}</p>
+          <p className="detail-price-note"><Info size={14}/>O preço final pode incluir frete e impostos.</p>
+          {url ? <Button nativeButton={false} render={<a href={url} target="_blank" rel="noopener noreferrer"/>} className="h-11 px-4">
+            Abrir anúncio na {watch.storeName ?? 'loja'}<ArrowUpRight data-icon="inline-end"/>
+          </Button> : <p className="detail-pending-link">O link do anúncio ainda não foi adicionado.</p>}
+        </div>
+      </section>
+    </div>
+    <div className="details-bottom"><span>Seu próximo relógio começa nos detalhes.</span><Button variant="ghost" className="h-11" onClick={onClose}><ChevronUp data-icon="inline-start"/>Recolher detalhes</Button></div>
+  </div>;
+}

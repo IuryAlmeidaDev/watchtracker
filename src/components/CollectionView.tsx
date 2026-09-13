@@ -1,5 +1,5 @@
 import { Trash2, ArrowUpRight } from 'lucide-react';
-import { WatchImageGallery } from './WatchImageGallery';
+import { WatchExpandablePhoto } from './WatchExpandablePhoto';
 import type { WatchItem } from '../store/catalogStore';
 
 interface CollectionViewProps {
@@ -24,9 +24,7 @@ export function CollectionView({ collectionWatches, onRemove, onExploreCatalog }
     <div className="catalog-grid">
       {collectionWatches.map((watch) => (
         <article key={watch.id} className="catalog-card">
-          <div className="catalog-photo-wrap">
-            <WatchImageGallery images={watch.images} alt={`${watch.brand} ${watch.model}`} />
-          </div>
+          <WatchExpandablePhoto watch={watch}/>
 
           <div className="catalog-content">
             <div className="brand-line">

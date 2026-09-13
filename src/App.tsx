@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   DndContext,
   closestCenter,
@@ -26,6 +26,8 @@ import {
   User as UserIcon,
   CheckCircle2,
   Trash2,
+  ChevronDown,
+  Images,
 } from 'lucide-react';
 
 import { useAuthStore } from './store/authStore';
@@ -33,7 +35,12 @@ import { useCatalogStore, type WatchItem } from './store/catalogStore';
 import { AuthModal } from './components/AuthModal';
 import { CatalogView } from './components/CatalogView';
 import { CollectionView } from './components/CollectionView';
-import { WatchImageGallery } from './components/WatchImageGallery';
+import { WatchPhoto } from './components/WatchPhoto';
+import { WatchDetails } from './components/WatchDetails';
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from './components/ui/collapsible';
+import { Badge } from './components/ui/badge';
+import { getWatchDetails } from './lib/watch-details';
+import { cn } from './lib/utils';
 
 function WatchRankingCard({
   watch,
@@ -53,14 +60,20 @@ function WatchRankingCard({
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: watch.id,
   });
+  const [open, setOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const { images } = getWatchDetails(watch);
+  function close() { setOpen(false); triggerRef.current?.focus({ preventScroll: true }); }
 
   return (
     <li
       ref={setNodeRef}
       style={{ transform: CSS.Transform.toString(transform), transition }}
-      className={`watch-row ${isDragging ? 'dragging' : ''}`}
+      className={cn('watch-row', 'expandable-watch', isDragging && 'dragging', open && 'is-open')}
       data-watch-id={watch.id}
     >
+      <Collapsible open={open} onOpenChange={setOpen} onKeyDown={event => { if (event.key === 'Escape' && open && !isDragging) { event.stopPropagation(); close(); } }}>
+      <div className="watch-summary">
       <div className="rank">
         <span>{String(index + 1).padStart(2, '0')}</span>
         <button
@@ -73,17 +86,19 @@ function WatchRankingCard({
         </button>
       </div>
 
-      <div className="watch-photo">
-        <WatchImageGallery images={watch.images} alt={`${watch.brand} ${watch.model}`} />
-      </div>
+      <CollapsibleTrigger ref={triggerRef} className={cn('watch-photo', 'watch-photo-trigger', images.length > 0 && 'has-photo')} aria-label={`${open ? 'Recolher' : 'Expandir'} ${watch.model}`}>
+        <WatchPhoto src={images[0]} alt={`${watch.brand} ${watch.model}`}/>
+        {images.length > 1 && <span className="detail-photo-count"><Images size={12}/>{images.length}</span>}
+      </CollapsibleTrigger>
 
       <div className="watch-info">
         <div className="brand-line">
           <span className="brand">{watch.brand}</span>
-          {index === 0 && <span className="priority">Próxima compra</span>}
+          {index === 0 && <Badge variant="secondary">Próxima compra</Badge>}
         </div>
-        <h3>{watch.model}</h3>
+        <h3><button type="button" className="watch-name-trigger" onClick={() => setOpen(!open)} aria-expanded={open}>{watch.model}</button></h3>
         <p className="specs">{watch.specs}</p>
+        <button type="button" className="watch-disclosure" onClick={() => setOpen(!open)} aria-expanded={open}>{open ? 'Recolher detalhes' : 'Conhecer o relógio'}<ChevronDown size={14}/></button>
         <div className="row-quick-actions">
           <button
             type="button"
@@ -133,6 +148,9 @@ function WatchRankingCard({
           <ArrowDown size={16} />
         </button>
       </div>
+      </div>
+      <CollapsibleContent className="watch-expansion"><WatchDetails watch={watch} onClose={close}/></CollapsibleContent>
+      </Collapsible>
     </li>
   );
 }
@@ -206,6 +224,7 @@ export default function App() {
           <button
             type="button"
             className={`nav-tab ${activeTab === 'ranking' ? 'active' : ''}`}
+            aria-current={activeTab === 'ranking' ? 'page' : undefined}
             onClick={() => setActiveTab('ranking')}
           >
             Meu Ranking <span className="tab-badge">{orderedRanking.length}</span>
@@ -213,6 +232,7 @@ export default function App() {
           <button
             type="button"
             className={`nav-tab ${activeTab === 'collection' ? 'active' : ''}`}
+            aria-current={activeTab === 'collection' ? 'page' : undefined}
             onClick={() => setActiveTab('collection')}
           >
             Minha Coleção <span className="tab-badge">{collectionWatches.length}</span>
@@ -220,6 +240,7 @@ export default function App() {
           <button
             type="button"
             className={`nav-tab ${activeTab === 'catalog' ? 'active' : ''}`}
+            aria-current={activeTab === 'catalog' ? 'page' : undefined}
             onClick={() => setActiveTab('catalog')}
           >
             Explorar Catálogo
@@ -264,7 +285,7 @@ export default function App() {
                   <span>No seu tempo.</span>
                 </h1>
                 <p>
-                  Os relógios que merecem um lugar na coleção.<br className="desktop-break" />
+                  Os relógios que merecem um lugar na coleção.{' '}<br className="desktop-break" />
                   Organize os favoritos e escolha o próximo.
                 </p>
               </div>
@@ -280,7 +301,7 @@ export default function App() {
             <section aria-labelledby="ranking-title" className="ranking-section">
               <div className="ranking-toolbar">
                 <div className="ranking-title">
-                  <h2>Minha seleção</h2>
+                  <h2 id="ranking-title">Minha seleção</h2>
                   <span className="count">{orderedRanking.length}</span>
                 </div>
                 <span className="saved-status">
@@ -289,8 +310,8 @@ export default function App() {
                 </span>
               </div>
               <div className="list-caption">
-                <p>Arraste pela alça para mudar a prioridade.</p>
-                <span>Da próxima compra aos planos futuros</span>
+                <p>Clique em um relógio e explore os detalhes.</p>
+                <span>Arraste pela alça para organizar</span>
               </div>
 
               {syncError && (

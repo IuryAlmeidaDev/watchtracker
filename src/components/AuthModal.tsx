@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { X, Lock, Mail, Loader2 } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 
@@ -9,6 +9,7 @@ interface AuthModalProps {
 }
 
 export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalProps) {
+  const dialogRef = useRef<HTMLDivElement>(null);
   const [mode, setMode] = useState<'login' | 'signup'>(defaultMode);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,16 +29,29 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
 
   useEffect(() => {
     if (!isOpen) return;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    dialogRef.current?.querySelector<HTMLInputElement>('input')?.focus();
 
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === 'Escape') {
         onClose();
+      }
+      if (e.key === 'Tab') {
+        const controls = Array.from(dialogRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), a[href]') ?? []);
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+        if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
       }
     }
 
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      previousFocus?.focus({ preventScroll: true });
     };
   }, [isOpen, onClose]);
 
@@ -69,8 +83,8 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
   }
 
   return (
-    <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
-      <div className="modal-card" onClick={(e) => e.stopPropagation()} aria-labelledby="auth-modal-title">
+    <div className="modal-backdrop" onClick={onClose}>
+      <div ref={dialogRef} className="modal-card" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
         <div className="modal-header">
           <div>
             <h2 id="auth-modal-title" className="modal-title">{mode === 'login' ? 'Acessar Conta' : 'Criar Conta'}</h2>
@@ -116,7 +130,6 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
               <input
                 id="auth-email"
                 type="email"
-                autoFocus
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
