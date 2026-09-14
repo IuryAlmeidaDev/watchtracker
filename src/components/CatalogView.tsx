@@ -3,8 +3,12 @@ import { Button } from './ui/button';
 import { useState } from 'react';
 import { WatchFilters } from './WatchFilters';
 import { WatchEmptyState } from './WatchEmptyState';
-import { filterWatches, watchTags } from '../lib/watch-tags';
+import { filterWatches, watchTags, tagGroups } from '../lib/watch-tags';
 import { Badge } from './ui/badge';
+import { WatchRegistration } from './WatchRegistration';
+import { registerWatch } from '../lib/register-watch';
+import { useAuthStore } from '../store/authStore';
+import { useCatalogStore } from '../store/catalogStore';
 import { WatchExpandablePhoto } from './WatchExpandablePhoto';
 import type { WatchItem } from '../store/catalogStore';
 
@@ -30,9 +34,16 @@ export function CatalogView({
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState<string[]>([]);
   const filtered = filterWatches(watches, query, selected);
+  const standardTags: readonly string[] = Object.values(tagGroups).flat();
+  const customTags = [...new Set(watches.flatMap(watchTags).filter(tag=>!standardTags.includes(tag)))];
+  const user = useAuthStore(state=>state.user);
+  const loadData = useCatalogStore(state=>state.loadData);
+  const [saved,setSaved] = useState(false);
   return (
     <>
-    <WatchFilters query={query} selected={selected} onQuery={setQuery} onSelected={setSelected} count={filtered.length}/>
+    {user?.app_metadata.catalog_admin && <div className="catalog-create"><WatchRegistration onSave={async draft=>{await registerWatch(draft);await loadData(user.id);setQuery('');setSelected([]);setSaved(true);}}/></div>}
+    {saved && <p role="status" className="filter-hint">Relógio cadastrado no catálogo.</p>}
+    <WatchFilters query={query} selected={selected} onQuery={setQuery} onSelected={setSelected} count={filtered.length} customTags={customTags}/>
     <div className="catalog-grid">
       {filtered.map((watch) => {
         const inRanking = rankingIds.includes(watch.id);

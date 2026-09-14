@@ -9,6 +9,8 @@ export interface WatchRecord {
   store_url: string | null;
   created_at: string;
   images?: WatchImageRecord[];
+  tags?: string[];
+  specifications?: Record<string,string>;
 }
 
 export interface WatchImageRecord {

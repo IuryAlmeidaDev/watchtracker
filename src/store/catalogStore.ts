@@ -72,7 +72,7 @@ export const useCatalogStore = create<CatalogState>((set, get) => ({
       const { data: dbWatches, error: watchesError } = await supabase
         .from('watches')
         .select(`
-          id, brand, model, reference, price_estimate, specs, store_name, store_url, created_at,
+          *,
           watch_images ( image_url, display_order, is_cover )
         `)
         .order('brand', { ascending: true });
@@ -88,6 +88,8 @@ export const useCatalogStore = create<CatalogState>((set, get) => ({
           model: w.model,
           priceEstimate: w.price_estimate,
           specs: w.specs,
+          tags: w.tags ?? undefined,
+          specifications: w.specifications ?? undefined,
           storeName: w.store_name,
           storeUrl: w.store_url,
           images: w.watch_images
