@@ -21,4 +21,7 @@ O anúncio `1005012362640352` corresponde ao Tandorio VH31, não ao Sea-Gull 196
 - casio-f91w.png: Fonte: Anúncio do Mercado Livre Casio F-91W clássico preto/dourado. Fundo transparente removido.
 - casio-f91w-silver.png: Fonte: Anúncio do Mercado Livre Casio F-91W clássico prata/preto. Fundo transparente removido.
 - casio-vintage-dourado.png: Fonte: Anúncio do Mercado Livre Casio Vintage Digital Dourado. Fundo transparente removido.
+- citizen-of-elegant-aw1750.png: Fonte: Catálogo oficial Citizen Watch (AW1750-85A). Fundo transparente removido.
+- citizen-of-elegant-aw1750-2.png: Fonte: Catálogo oficial Citizen Watch (AW1750-85A) detalhe tampa de rosca/fecho. Fundo transparente removido.
+- citizen-of-elegant-aw1750-3.png: Fonte: Catálogo oficial Citizen Watch (AW1750-85A) perfil e coroa. Fundo transparente removido.
 

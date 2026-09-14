@@ -32,6 +32,26 @@ const details: Record<string, WatchDetails> = {
     images: ['/watches/casio-vintage-dourado.png'],
     facts: { 'Movimento': 'Digital Casio Quartz', 'Dimensões': '36,8 × 33,2 mm', 'Espessura': '8,2 mm', 'Acabamento': 'Revestimento dourado iônico', 'Pulseira': 'Aço inoxidável dourado', 'Resistência à água': '30 m · 3 ATM', 'Funções': 'Cronômetro 1/100s, alarme diário, calendário automático, luz LED' },
   },
+  'of collection elegant (aw1750-85a)': {
+    images: [
+      '/watches/citizen-of-elegant-aw1750.png',
+      '/watches/citizen-of-elegant-aw1750-2.png',
+      '/watches/citizen-of-elegant-aw1750-3.png',
+    ],
+    facts: {
+      'Movimento': 'Eco-Drive J810 (Alimentação Solar)',
+      'Reserva de carga': 'Aproximadamente 8 meses de autonomia',
+      'Diâmetro': '41,20 mm',
+      'Espessura': '10,40 mm',
+      'Peso': '129 g',
+      'Material da caixa': 'Aço inoxidável com fundo de rosca',
+      'Pulseira': 'Aço inoxidável com fecho de botão duplo',
+      'Vidro': 'Cristal Mineral',
+      'Resistência à água': '10 bar · 100 metros',
+      'Mostrador': 'Branco texturizado com índices aplicados',
+      'Funções': 'Horas, minutos, segundos e calendário com data às 3h',
+    },
+  },
 };
 
 export function getWatchDetails(watch: WatchItem) {
