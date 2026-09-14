@@ -19,7 +19,8 @@ test('expansion, photo controls, stacked details, keyboard and focus', async ({p
  const photo = await panel.locator('.detail-gallery-stage').first().boundingBox();
  const description = await panel.locator('.technical-details').boundingBox();
  const next = await panel.getByRole('button',{name:'Próxima foto',exact:true}).boundingBox();
- expect(description!.y).toBeGreaterThan(photo!.y + photo!.height);
+ if(info.project.name==='mobile') expect(description!.y).toBeGreaterThan(photo!.y + photo!.height);
+ else expect(description!.x + description!.width).toBeLessThanOrEqual(photo!.x);
  expect(next!.x).toBeGreaterThanOrEqual(photo!.x);
  expect(next!.x + next!.width).toBeLessThanOrEqual(photo!.x + photo!.width);
  expect(next!.y).toBeGreaterThan(photo!.y);

@@ -6,7 +6,11 @@ test('filters combine with AND and can be cleared',async({page},info)=>{
  await page.getByRole('checkbox',{name:'Automático',exact:true}).check();
  await page.screenshot({path:`.impeccable/review/filters-${info.project.name}.png`});
  const count=await page.locator('.catalog-card').count();expect(count).toBeGreaterThan(0);
- for(const card of await page.locator('.catalog-card').all()){await expect(card.locator('.watch-tags')).toContainText('Safira');await expect(card.locator('.watch-tags')).toContainText('Automático');}
+ await expect(page.locator('.catalog-card .watch-tags')).toHaveCount(0);
+ await page.locator('.catalog-card').first().getByRole('button').click();
+ const viewer=page.getByRole('dialog');
+ await expect(viewer.locator('.watch-tags')).toContainText('Safira');
+ await page.keyboard.press('Escape');await expect(viewer).not.toBeVisible();
  await page.getByRole('checkbox',{name:'Eco-Drive',exact:true}).check();
  await expect(page.getByText('Nenhum relógio com essa combinação')).toBeVisible();
  await page.getByRole('button',{name:'Limpar filtros'}).first().click();

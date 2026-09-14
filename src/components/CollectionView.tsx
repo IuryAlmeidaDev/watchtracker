@@ -21,18 +21,8 @@ export function CollectionView({ collectionWatches, onRemove, onExploreCatalog }
     <div className="catalog-grid">
       {collectionWatches.map((watch) => (
         <article key={watch.id} className="catalog-card">
-          <WatchExpandablePhoto watch={watch}/>
-
-          <div className="catalog-content">
-            <div className="brand-line">
-              <span className="brand">{watch.brand}</span>
-              <span className="catalog-price">{watch.priceEstimate}</span>
-            </div>
-
-            <h3 className="catalog-model">{watch.model}</h3>
-            <p className="catalog-specs">{watch.specs}</p>
-
-            <div className="catalog-actions">
+            <WatchExpandablePhoto watch={watch}>
+              <div className="catalog-actions">
               <Button
                 type="button"
                 variant="outline" className="h-11"
@@ -52,7 +42,7 @@ export function CollectionView({ collectionWatches, onRemove, onExploreCatalog }
                 </a>
               )}
             </div>
-          </div>
+          </WatchExpandablePhoto>
         </article>
       ))}
     </div>

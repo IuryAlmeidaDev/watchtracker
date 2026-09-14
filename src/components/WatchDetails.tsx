@@ -7,8 +7,9 @@ import { Separator } from './ui/separator';
 import { WatchCarousel } from './WatchCarousel';
 import { watchTags } from '../lib/watch-tags';
 import { Badge } from './ui/badge';
+import type { ReactNode } from 'react';
 
-export function WatchDetails({ watch, onClose }: { watch: WatchItem; onClose: () => void }) {
+export function WatchDetails({ watch, onClose, actions }: { watch: WatchItem; onClose: () => void; actions?: ReactNode }) {
   const { images, facts } = getWatchDetails(watch);
   const url = safeStoreUrl(watch.storeUrl);
   return <div className="watch-details" data-testid={`details-${watch.id}`}>
@@ -16,18 +17,18 @@ export function WatchDetails({ watch, onClose }: { watch: WatchItem; onClose: ()
     <div className="details-grid">
       <WatchCarousel images={images} model={watch.model}/>
       <section className="technical-details" aria-labelledby={`spec-title-${watch.id}`}>
+        <div className="modal-price"><span className="detail-price-label">Valor estimado</span><p className="detail-price">{watch.priceEstimate}</p></div>
         <div className="details-heading"><ScanLine size={19} aria-hidden="true"/><h4 id={`spec-title-${watch.id}`}>Cada detalhe conta.</h4></div>
         <p className="details-description">{watch.specs}</p>
         <div className="watch-tags">{watchTags(watch).map(tag=><Badge key={tag} variant="secondary">{tag}</Badge>)}</div>
         <dl className="technical-grid">{Object.entries(facts).map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
         <div className="purchase-detail">
-          <span className="detail-price-label">Valor estimado</span>
-          <p className="detail-price">{watch.priceEstimate}</p>
           <p className="detail-price-note"><Info size={14}/>O preço final pode incluir frete e impostos.</p>
           {url ? <a href={url} target="_blank" rel="noopener noreferrer" data-slot="button" className={cn(buttonVariants(), 'h-11 px-4')}>
             Abrir anúncio na {watch.storeName ?? 'loja'}<ArrowUpRight data-icon="inline-end"/>
           </a> : <p className="detail-pending-link">O link do anúncio ainda não foi adicionado.</p>}
         </div>
+        {actions}
       </section>
     </div>
     <div className="details-bottom"><span>Seu próximo relógio começa nos detalhes.</span><Button variant="ghost" className="h-11" onClick={onClose}><X data-icon="inline-start"/>Fechar detalhes</Button></div>

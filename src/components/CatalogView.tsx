@@ -1,10 +1,10 @@
-import { ArrowUpRight, Plus, Check, Heart } from 'lucide-react';
+import { Plus, Check, Heart } from 'lucide-react';
+import { useExpansionStore } from '../store/appearanceStore';
 import { Button } from './ui/button';
 import { useState } from 'react';
 import { WatchFilters } from './WatchFilters';
 import { WatchEmptyState } from './WatchEmptyState';
 import { filterWatches, watchTags, tagGroups } from '../lib/watch-tags';
-import { Badge } from './ui/badge';
 import { WatchRegistration } from './WatchRegistration';
 import { registerWatch } from '../lib/register-watch';
 import { useAuthStore } from '../store/authStore';
@@ -39,6 +39,11 @@ export function CatalogView({
   const user = useAuthStore(state=>state.user);
   const loadData = useCatalogStore(state=>state.loadData);
   const [saved,setSaved] = useState(false);
+  const [authPending, setAuthPending] = useState(false);
+  const requireAuth = () => {
+    setAuthPending(true);
+    useExpansionStore.getState().setActive(null);
+  };
   return (
     <>
     {user?.app_metadata.catalog_admin && <div className="catalog-create"><WatchRegistration onSave={async draft=>{await registerWatch(draft);await loadData(user.id);setQuery('');setSelected([]);setSaved(true);}}/></div>}
@@ -51,23 +56,18 @@ export function CatalogView({
 
         return (
           <article key={watch.id} className="catalog-card">
-            <WatchExpandablePhoto watch={watch}/>
-
-            <div className="catalog-content">
-              <div className="brand-line">
-                <span className="brand">{watch.brand}</span>
-                <span className="catalog-price">{watch.priceEstimate}</span>
-              </div>
-
-              <h3 className="catalog-model">{watch.model}</h3>
-              <p className="catalog-specs">{watch.specs}</p>
-              <div className="watch-tags">{watchTags(watch).map(tag=><Badge key={tag} variant="secondary">{tag}</Badge>)}</div>
-
+            <WatchExpandablePhoto watch={watch} onClosed={() => {
+              if (authPending) {
+                setAuthPending(false);
+                // Let the product dialog restore focus before opening authentication.
+                requestAnimationFrame(onRequireAuth);
+              }
+            }}>
               <div className="catalog-actions">
                 <Button
                   type="button"
                   variant={inRanking ? 'secondary' : 'outline'} className="h-11"
-                  onClick={() => (isAuthenticated ? onAddToRanking(watch.id) : onRequireAuth())}
+                  onClick={() => (isAuthenticated ? onAddToRanking(watch.id) : requireAuth())}
                   disabled={inRanking}
                 >
                   {inRanking ? <Check data-icon="inline-start" /> : <Heart data-icon="inline-start" />}
@@ -77,25 +77,15 @@ export function CatalogView({
                 <Button
                   type="button"
                   variant={inCollection ? 'secondary' : 'outline'} className="h-11"
-                  onClick={() => (isAuthenticated ? onAddToCollection(watch.id) : onRequireAuth())}
+                  onClick={() => (isAuthenticated ? onAddToCollection(watch.id) : requireAuth())}
                   disabled={inCollection}
                 >
                   {inCollection ? <Check data-icon="inline-start" /> : <Plus data-icon="inline-start" />}
                   {inCollection ? 'Na Coleção' : 'Coleção'}
                 </Button>
 
-                {watch.storeUrl && (
-                  <a
-                    href={watch.storeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="catalog-link"
-                  >
-                    Ver Loja <ArrowUpRight size={14} />
-                  </a>
-                )}
               </div>
-            </div>
+            </WatchExpandablePhoto>
           </article>
         );
       })}
