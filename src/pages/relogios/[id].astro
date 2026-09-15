@@ -1,0 +1,128 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { watches } from '../../data/watches';
+import { getWatchDetails } from '../../lib/watch-details';
+import { ArrowLeft, ExternalLink, ShieldCheck, Sparkles } from 'lucide-react';
+
+export function getStaticPaths() {
+  return watches.map((w) => ({
+    params: { id: w.id },
+    props: { watch: w },
+  }));
+}
+
+const { watch } = Astro.props;
+const watchItem = {
+  id: watch.id,
+  brand: watch.marca,
+  model: watch.nome,
+  priceEstimate: typeof watch.preco === 'number' ? `≈ R$ ${watch.preco}` : `R$ ${watch.preco.min}–R$ ${watch.preco.max}`,
+  specs: watch.especificacoes,
+  storeName: watch.loja,
+  storeUrl: watch.url ?? null,
+  images: watch.imagem ? [watch.imagem] : [],
+};
+
+const { images, facts } = getWatchDetails(watchItem);
+const primaryImage = images[0] || '/favicon.svg';
+const pageTitle = `${watch.marca} ${watch.nome} — WatchTracker`;
+const pageDescription = `Especificações, fotos e detalhes do relógio ${watch.marca} ${watch.nome}. ${watch.especificacoes}`;
+---
+
+<Layout title={pageTitle} description={pageDescription} image={primaryImage}>
+  <main class="app-shell py-8">
+    <nav class="mb-8 flex items-center justify-between border-b border-[var(--tone-line)] pb-4">
+      <a href="/" class="inline-flex items-center gap-2 text-sm font-medium text-[var(--tone-accent)] hover:underline">
+        <ArrowLeft size={16} /> Voltar para o Catálogo
+      </a>
+      <span class="text-xs uppercase tracking-wider text-[var(--tone-muted)] font-mono">
+        Ficha Técnica Oficial
+      </span>
+    </nav>
+
+    <article class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <!-- Coluna da Galeria -->
+      <section class="lg:col-span-6 space-y-4">
+        <div class="aspect-square w-full rounded-2xl bg-[var(--tone-surface)] border border-[var(--tone-line)] overflow-hidden p-6 flex items-center justify-center shadow-lg">
+          <img
+            src={primaryImage}
+            alt={`${watch.marca} ${watch.nome}`}
+            class="max-h-full max-w-full object-contain transition-transform duration-300 hover:scale-105"
+          />
+        </div>
+
+        {images.length > 1 && (
+          <div class="grid grid-cols-4 gap-3">
+            {images.map((img, idx) => (
+              <div class="aspect-square rounded-lg border border-[var(--tone-line)] bg-[var(--tone-surface)] p-2 overflow-hidden flex items-center justify-center">
+                <img src={img} alt={`Foto ${idx + 1} de ${watch.nome}`} class="max-h-full max-w-full object-contain" />
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
+      <!-- Coluna de Informações e Ficha Técnica -->
+      <section class="lg:col-span-6 flex flex-col justify-between">
+        <div class="space-y-6">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-widest text-[var(--tone-accent)]">
+              {watch.marca}
+            </span>
+            <h1 class="text-3xl lg:text-4xl font-semibold tracking-tight text-[var(--tone-ink)] mt-1 font-['Manrope']">
+              {watch.nome}
+            </h1>
+            <p class="text-2xl font-medium text-[var(--tone-accent)] mt-3 font-mono">
+              {watchItem.priceEstimate}
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-[var(--tone-line)] bg-[var(--tone-surface)] p-5 space-y-3">
+            <h2 class="text-sm font-semibold uppercase tracking-wider text-[var(--tone-muted)] flex items-center gap-2">
+              <Sparkles size={16} className="text-[var(--tone-accent)]" /> Resumo do Modelo
+            </h2>
+            <p class="text-sm leading-relaxed text-[var(--tone-secondary-ink)]">
+              {watch.especificacoes}
+            </p>
+          </div>
+
+          {facts && Object.keys(facts).length > 0 && (
+            <div class="space-y-3">
+              <h2 class="text-sm font-semibold uppercase tracking-wider text-[var(--tone-muted)] flex items-center gap-2">
+                <ShieldCheck size={16} className="text-[var(--tone-accent)]" /> Especificações do Fabricante
+              </h2>
+              <dl class="divide-y divide-[var(--tone-line)] rounded-xl border border-[var(--tone-line)] bg-[var(--tone-surface)] text-sm">
+                {Object.entries(facts).map(([key, val]) => (
+                  <div class="flex justify-between py-2.5 px-4">
+                    <dt class="text-[var(--tone-muted)] font-medium">{key}</dt>
+                    <dd class="text-[var(--tone-ink)] text-right font-medium">{val}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          )}
+        </div>
+
+        <div class="pt-8 mt-6 border-t border-[var(--tone-line)] flex flex-wrap gap-4 items-center justify-between">
+          <a
+            href={`/?watch=${watch.id}`}
+            class="px-6 py-3 rounded-lg bg-[var(--tone-accent)] text-[var(--tone-canvas)] font-medium text-sm hover:opacity-90 transition-opacity flex items-center gap-2 shadow-md"
+          >
+            Abrir no Catálogo Principal
+          </a>
+
+          {watch.url && (
+            <a
+              href={watch.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-5 py-3 rounded-lg border border-[var(--tone-line)] bg-[var(--tone-surface)] text-[var(--tone-ink)] text-sm hover:bg-[var(--tone-raised)] transition-colors flex items-center gap-2"
+            >
+              Comprar na {watch.loja} <ExternalLink size={14} />
+            </a>
+          )}
+        </div>
+      </section>
+    </article>
+  </main>
+</Layout>

@@ -1,0 +1,50 @@
+---
+import '@fontsource/dm-sans';
+import '@fontsource/manrope';
+import '../index.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = "WatchTracker — Minha seleção",
+  description = "Sua próxima escolha, no seu tempo. Organize seu ranking pessoal de relógios.",
+  image = "/favicon.svg",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <!-- Prevent theme flash -->
+    <script is:inline>
+      try {
+        const theme = localStorage.getItem('watchtracker-theme') || 'dark';
+        document.documentElement.dataset.theme = theme === 'dark' ? 'dark' : 'light';
+      } catch {}
+    </script>
+  </head>
+  <body class="min-h-screen bg-[var(--tone-canvas)] text-[var(--tone-ink)] selection:bg-[var(--tone-accent)] selection:text-[var(--tone-canvas)]">
+    <slot />
+  </body>
+</html>

@@ -12,6 +12,24 @@ export function WatchDialogContent({ watch, onClose, actions }: { watch: WatchIt
       <DialogDescription>{watch.brand}</DialogDescription>
       <DialogClose render={<Button variant="ghost" size="icon" className="size-11"/>} className="watch-dialog-close" aria-label="Fechar detalhes"><X/></DialogClose>
     </DialogHeader>
-    <div className="watch-dialog-body"><WatchDetails watch={watch} onClose={onClose} actions={actions}/></div>
+    <div className="watch-dialog-body">
+      <WatchDetails
+        watch={watch}
+        onClose={onClose}
+        actions={
+          <>
+            <div className="mt-3">
+              <a
+                href={`/relogios/${watch.id}`}
+                className="inline-flex items-center gap-1.5 text-xs text-[var(--tone-accent)] hover:underline font-medium"
+              >
+                Ver página dedicada completa →
+              </a>
+            </div>
+            {actions}
+          </>
+        }
+      />
+    </div>
   </DialogContent>;
 }
